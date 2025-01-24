@@ -2,11 +2,11 @@ import { getPage } from "@/sanity/sanity-utils";
 import { PortableText } from "next-sanity";
 
 type Props = {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
 export default async function Page({ params }: Props) {
-    const page = await getPage(params.slug);
+    const page = await getPage((await params).slug);
 
     return (
         <div>
